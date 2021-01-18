@@ -9,7 +9,7 @@ int main(void)
     {
         n = get_long("Number: ");
     }
-    while (n < 1000000000000 || n > 9999999999999999);
+    while (n < 0 || n > 9999999999999999);
     if (n < 1000000000000)
     {
         printf("INVALID\n");
