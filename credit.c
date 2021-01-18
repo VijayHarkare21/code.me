@@ -14,6 +14,14 @@ int main(void)
     {
         printf("INVALID\n");
     }
+    else if (n > 9999999999999999)
+    {
+        printf("INVALID\n");
+    }
+    else if (n > 10000000000000 && n < 99999999999999)
+    {
+        printf("INVALID\n");
+    }
     // Calculating checksum
     string status;
     if (n >= 1000000000000 && n <= 9999999999999)
