@@ -24,28 +24,21 @@ int main(void)
     {
         x++;
         c = c - 25;
-        i++;
     }
-    i = 1;
     while (c >= 10 * i)
     {
         y++;
         c = c - 10;
-        i++;
     }
-    i = 1;
     while (c >= 5 * i)
     {
         z++;
         c = c - 5;
-        i++;
     }
-    i = 1;
     while (c >= 1 * i)
     {
         w++;
         c = c - 1;
-        i++;
     }
     // Calculate the total coins used and print the respective value
     int a = x + y + z + w;
