@@ -13,6 +13,7 @@ int main(int argc, string argv[])
     if (argc == 2)
     {
         int status = 0;
+        // Here, we actually count the number of actual digits in the string, and usd this method to validate key
         for (int i = 0; i < strlen(argv[1]); i++)
         {
             if (isdigit(argv[1][i]))
@@ -87,11 +88,13 @@ int main(int argc, string argv[])
         else
         {
             printf("Usage: ./caesar key\n");
+            return 1;
         }
     }
     else
     {
         printf("Usage: ./caesar key\n");
+        return 1;
     }
     return 0;
 }
