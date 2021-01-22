@@ -20,6 +20,12 @@ int main(int argc, string argv[])
             {
                 status++;
             }
+            // If the characters in the entered key are anything other than a digit, function main will stop
+            else
+            {
+                printf("Usage: ./caesar key\n");
+                return 1;
+            }
         }
         if (status == strlen(argv[1]) || status == 0)
         {
