@@ -14,26 +14,30 @@ int main(void)
     // Calculate number of letters, words and sentences
     for (int i = 0, n = strlen(s); i < n; i++)
     {
+        // Identifing a letter
         if (isalpha(s[i]))
         {
             letter++;
         }
+        // Identifing a word
         else if (isspace(s[i]))
         {
             word++;
         }
+        // Identifing a sentence
         else if (s[i] == '.' || s[i] == '?' || s[i] == '!')
         {
             sentence++;
         }
     }
+    // Adjusting number of words
     word++;
-    // Calculate average no. of letters per 100 words and average number of sentences per 100 words
+    // Calculating average no. of letters per 100 words and average number of sentences per 100 words
     float L;
     L = ((float) letter / word) * 100;
     float S;
     S = ((float) sentence / word) * 100;
-    // Use the Coleman-Liau formula to calculate grade of the text
+    // Using the Coleman-Liau formula to calculate grade of the text
     float index;
     index = 0.0588 * L - 0.296 * S - 15.8;
     int X = round(index);
