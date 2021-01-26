@@ -86,6 +86,7 @@ void print_winner(void)
     {
         for (int j = 0; j < candidate_count; j++)
         {
+            // The following steps ensure that all types of combinations get included
             if (candidate_count != 1)
             {
                 if (i != j)
@@ -106,6 +107,7 @@ void print_winner(void)
                     }
                 }
             }
+            // This step ensures that the algorithm works even when only one name is provided as command-line argument
             else
             {
                 if (candidates[i].votes > 0)
