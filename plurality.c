@@ -90,7 +90,7 @@ void print_winner(void)
             {
                 if (candidates[i].votes == 0 || candidates[j].votes == 0)
                 {
-                    if (candidates[i].votes > candidates[i].votes)
+                    if (candidates[i].votes > candidates[j].votes)
                     {
                         max_count = candidates[i].votes;
                     }
