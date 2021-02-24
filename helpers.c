@@ -130,6 +130,18 @@ void reflect(int height, int width, RGBTRIPLE image[height][width])
 // Blur image
 void blur(int height, int width, RGBTRIPLE image[height][width])
 {
+    // Creating a buffer array for copying original array
+    RGBTRIPLE image_c[height][width];
+    // Copying the array into another array for precise operating
+    for (int i = 0; i < height; i++)
+    {
+        for (int j = 0; j < width; j++)
+        {
+            image_c[i][j].rgbtBlue = image[i][j].rgbtBlue;
+            image_c[i][j].rgbtGreen = image[i][j].rgbtGreen;
+            image_c[i][j].rgbtRed = image[i][j].rgbtRed;
+        }
+    }
     // First we iterate through each pixel
     for (int i = 0; i < height; i++)
     {
@@ -138,89 +150,89 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
             // The following four are the corner cases
             if (i == 0 && j == 0)
             {
-                image[i][j].rgbtBlue = round_avg4(image[i][j].rgbtBlue, image[i + 1][j].rgbtBlue, image[i][j + 1].rgbtBlue,
-                                                  image[i + 1][j + 1].rgbtBlue);
-                image[i][j].rgbtGreen = round_avg4(image[i][j].rgbtGreen, image[i + 1][j].rgbtGreen, image[i][j + 1].rgbtGreen,
-                                                   image[i + 1][j + 1].rgbtGreen);
-                image[i][j].rgbtRed = round_avg4(image[i][j].rgbtRed, image[i + 1][j].rgbtRed, image[i][j + 1].rgbtRed,
-                                                 image[i + 1][j + 1].rgbtRed);
+                image[i][j].rgbtBlue = round_avg4(image_c[i][j].rgbtBlue, image_c[i + 1][j].rgbtBlue, image_c[i][j + 1].rgbtBlue,
+                                                  image_c[i + 1][j + 1].rgbtBlue);
+                image[i][j].rgbtGreen = round_avg4(image_c[i][j].rgbtGreen, image_c[i + 1][j].rgbtGreen, image_c[i][j + 1].rgbtGreen,
+                                                   image_c[i + 1][j + 1].rgbtGreen);
+                image[i][j].rgbtRed = round_avg4(image_c[i][j].rgbtRed, image_c[i + 1][j].rgbtRed, image_c[i][j + 1].rgbtRed,
+                                                 image_c[i + 1][j + 1].rgbtRed);
             }
             else if (i == 0 && j == (width - 1))
             {
-                image[i][j].rgbtBlue = round_avg4(image[i][j].rgbtBlue, image[i][j - 1].rgbtBlue, image[i + 1][j].rgbtBlue,
-                                                  image[i + 1][j - 1].rgbtBlue);
-                image[i][j].rgbtGreen = round_avg4(image[i][j].rgbtGreen, image[i][j - 1].rgbtGreen, image[i + 1][j].rgbtGreen,
-                                                   image[i + 1][j - 1].rgbtGreen);
-                image[i][j].rgbtRed = round_avg4(image[i][j].rgbtRed, image[i][j - 1].rgbtRed, image[i + 1][j].rgbtRed,
-                                                 image[i + 1][j - 1].rgbtRed);
+                image[i][j].rgbtBlue = round_avg4(image_c[i][j].rgbtBlue, image_c[i][j - 1].rgbtBlue, image_c[i + 1][j].rgbtBlue,
+                                                  image_c[i + 1][j - 1].rgbtBlue);
+                image[i][j].rgbtGreen = round_avg4(image_c[i][j].rgbtGreen, image_c[i][j - 1].rgbtGreen, image_c[i + 1][j].rgbtGreen,
+                                                   image_c[i + 1][j - 1].rgbtGreen);
+                image[i][j].rgbtRed = round_avg4(image_c[i][j].rgbtRed, image_c[i][j - 1].rgbtRed, image_c[i + 1][j].rgbtRed,
+                                                 image_c[i + 1][j - 1].rgbtRed);
             }
             else if (i == (height - 1) && j == 0)
             {
-                image[i][j].rgbtBlue = round_avg4(image[i][j].rgbtBlue, image[i][j + 1].rgbtBlue, image[i - 1][j].rgbtBlue,
-                                                  image[i - 1][j + 1].rgbtBlue);
-                image[i][j].rgbtGreen = round_avg4(image[i][j].rgbtGreen, image[i][j + 1].rgbtGreen, image[i - 1][j].rgbtGreen,
-                                                   image[i - 1][j + 1].rgbtGreen);
-                image[i][j].rgbtRed = round_avg4(image[i][j].rgbtRed, image[i][j + 1].rgbtRed, image[i - 1][j].rgbtRed,
-                                                 image[i - 1][j + 1].rgbtRed);
+                image[i][j].rgbtBlue = round_avg4(image_c[i][j].rgbtBlue, image_c[i][j + 1].rgbtBlue, image_c[i - 1][j].rgbtBlue,
+                                                  image_c[i - 1][j + 1].rgbtBlue);
+                image[i][j].rgbtGreen = round_avg4(image_c[i][j].rgbtGreen, image_c[i][j + 1].rgbtGreen, image_c[i - 1][j].rgbtGreen,
+                                                   image_c[i - 1][j + 1].rgbtGreen);
+                image[i][j].rgbtRed = round_avg4(image_c[i][j].rgbtRed, image_c[i][j + 1].rgbtRed, image_c[i - 1][j].rgbtRed,
+                                                 image_c[i - 1][j + 1].rgbtRed);
             }
             else if (i == (height - 1) && j == (width - 1))
             {
-                image[i][j].rgbtBlue = round_avg4(image[i][j].rgbtBlue, image[i][j - 1].rgbtBlue, image[i - 1][j].rgbtBlue,
-                                                  image[i - 1][j - 1].rgbtBlue);
-                image[i][j].rgbtGreen = round_avg4(image[i][j].rgbtGreen, image[i][j - 1].rgbtGreen, image[i - 1][j].rgbtGreen,
-                                                   image[i - 1][j - 1].rgbtGreen);
-                image[i][j].rgbtRed = round_avg4(image[i][j].rgbtRed, image[i][j - 1].rgbtRed, image[i - 1][j].rgbtRed,
-                                                 image[i - 1][j - 1].rgbtRed);
+                image[i][j].rgbtBlue = round_avg4(image_c[i][j].rgbtBlue, image_c[i][j - 1].rgbtBlue, image_c[i - 1][j].rgbtBlue,
+                                                  image_c[i - 1][j - 1].rgbtBlue);
+                image[i][j].rgbtGreen = round_avg4(image_c[i][j].rgbtGreen, image_c[i][j - 1].rgbtGreen, image_c[i - 1][j].rgbtGreen,
+                                                   image_c[i - 1][j - 1].rgbtGreen);
+                image[i][j].rgbtRed = round_avg4(image_c[i][j].rgbtRed, image_c[i][j - 1].rgbtRed, image_c[i - 1][j].rgbtRed,
+                                                 image_c[i - 1][j - 1].rgbtRed);
             }
             // The next four are the edge cases
             else if (i == 0 && j != 0 && j != (width - 1))
             {
-                image[i][j].rgbtBlue = round_avg6(image[i][j].rgbtBlue, image[i][j + 1].rgbtBlue, image[i][j - 1].rgbtBlue,
-                                                  image[i + 1][j].rgbtBlue, image[i + 1][j + 1].rgbtBlue, image[i + 1][j - 1].rgbtBlue);
-                image[i][j].rgbtGreen = round_avg6(image[i][j].rgbtGreen, image[i][j + 1].rgbtGreen, image[i][j - 1].rgbtGreen,
-                                                   image[i + 1][j].rgbtGreen, image[i + 1][j + 1].rgbtGreen, image[i + 1][j - 1].rgbtGreen);
-                image[i][j].rgbtRed = round_avg6(image[i][j].rgbtRed, image[i][j + 1].rgbtRed, image[i][j - 1].rgbtRed,
-                                                 image[i + 1][j].rgbtRed, image[i + 1][j + 1].rgbtRed, image[i + 1][j - 1].rgbtRed);
+                image[i][j].rgbtBlue = round_avg6(image_c[i][j].rgbtBlue, image_c[i][j + 1].rgbtBlue, image_c[i][j - 1].rgbtBlue,
+                                                  image_c[i + 1][j].rgbtBlue, image_c[i + 1][j + 1].rgbtBlue, image_c[i + 1][j - 1].rgbtBlue);
+                image[i][j].rgbtGreen = round_avg6(image_c[i][j].rgbtGreen, image_c[i][j + 1].rgbtGreen, image_c[i][j - 1].rgbtGreen,
+                                                   image_c[i + 1][j].rgbtGreen, image_c[i + 1][j + 1].rgbtGreen, image_c[i + 1][j - 1].rgbtGreen);
+                image[i][j].rgbtRed = round_avg6(image_c[i][j].rgbtRed, image_c[i][j + 1].rgbtRed, image_c[i][j - 1].rgbtRed,
+                                                 image_c[i + 1][j].rgbtRed, image_c[i + 1][j + 1].rgbtRed, image_c[i + 1][j - 1].rgbtRed);
             }
             else if (j == 0 && i != 0 && i != (height - 1))
             {
-                image[i][j].rgbtBlue = round_avg6(image[i][j].rgbtBlue, image[i + 1][j].rgbtBlue, image[i - 1][j].rgbtBlue,
-                                                  image[i][j + 1].rgbtBlue, image[i + 1][j + 1].rgbtBlue, image[i - 1][j + 1].rgbtBlue);
-                image[i][j].rgbtGreen = round_avg6(image[i][j].rgbtGreen, image[i + 1][j].rgbtGreen, image[i - 1][j].rgbtGreen,
-                                                   image[i][j + 1].rgbtGreen, image[i + 1][j + 1].rgbtGreen, image[i - 1][j + 1].rgbtGreen);
-                image[i][j].rgbtRed = round_avg6(image[i][j].rgbtRed, image[i + 1][j].rgbtRed, image[i - 1][j].rgbtRed,
-                                                 image[i][j + 1].rgbtRed, image[i + 1][j + 1].rgbtRed, image[i - 1][j + 1].rgbtRed);
+                image[i][j].rgbtBlue = round_avg6(image_c[i][j].rgbtBlue, image_c[i + 1][j].rgbtBlue, image_c[i - 1][j].rgbtBlue,
+                                                  image_c[i][j + 1].rgbtBlue, image_c[i + 1][j + 1].rgbtBlue, image_c[i - 1][j + 1].rgbtBlue);
+                image[i][j].rgbtGreen = round_avg6(image_c[i][j].rgbtGreen, image_c[i + 1][j].rgbtGreen, image_c[i - 1][j].rgbtGreen,
+                                                   image_c[i][j + 1].rgbtGreen, image_c[i + 1][j + 1].rgbtGreen, image_c[i - 1][j + 1].rgbtGreen);
+                image[i][j].rgbtRed = round_avg6(image_c[i][j].rgbtRed, image_c[i + 1][j].rgbtRed, image_c[i - 1][j].rgbtRed,
+                                                 image_c[i][j + 1].rgbtRed, image_c[i + 1][j + 1].rgbtRed, image_c[i - 1][j + 1].rgbtRed);
             }
             else if (i == (height - 1) && j != 0 && j != (width - 1))
             {
-                image[i][j].rgbtBlue = round_avg6(image[i][j].rgbtBlue, image[i][j + 1].rgbtBlue, image[i][j - 1].rgbtBlue,
-                                                  image[i - 1][j].rgbtBlue, image[i - 1][j + 1].rgbtBlue, image[i - 1][j - 1].rgbtBlue);
-                image[i][j].rgbtGreen = round_avg6(image[i][j].rgbtGreen, image[i][j + 1].rgbtGreen, image[i][j - 1].rgbtGreen,
-                                                   image[i - 1][j].rgbtGreen, image[i - 1][j + 1].rgbtGreen, image[i - 1][j - 1].rgbtGreen);
-                image[i][j].rgbtRed = round_avg6(image[i][j].rgbtRed, image[i][j + 1].rgbtRed, image[i][j - 1].rgbtRed,
-                                                 image[i - 1][j].rgbtRed, image[i - 1][j + 1].rgbtRed, image[i - 1][j - 1].rgbtRed);
+                image[i][j].rgbtBlue = round_avg6(image_c[i][j].rgbtBlue, image_c[i][j + 1].rgbtBlue, image_c[i][j - 1].rgbtBlue,
+                                                  image_c[i - 1][j].rgbtBlue, image_c[i - 1][j + 1].rgbtBlue, image_c[i - 1][j - 1].rgbtBlue);
+                image[i][j].rgbtGreen = round_avg6(image_c[i][j].rgbtGreen, image_c[i][j + 1].rgbtGreen, image_c[i][j - 1].rgbtGreen,
+                                                   image_c[i - 1][j].rgbtGreen, image_c[i - 1][j + 1].rgbtGreen, image_c[i - 1][j - 1].rgbtGreen);
+                image[i][j].rgbtRed = round_avg6(image_c[i][j].rgbtRed, image_c[i][j + 1].rgbtRed, image_c[i][j - 1].rgbtRed,
+                                                 image_c[i - 1][j].rgbtRed, image_c[i - 1][j + 1].rgbtRed, image_c[i - 1][j - 1].rgbtRed);
             }
             else if (j == (width - 1) && i != 0 && i != (height - 1))
             {
-                image[i][j].rgbtBlue = round_avg6(image[i][j].rgbtBlue, image[i + 1][j].rgbtBlue, image[i - 1][j].rgbtBlue,
-                                                  image[i][j - 1].rgbtBlue, image[i - 1][j - 1].rgbtBlue, image[i + 1][j - 1].rgbtBlue);
-                image[i][j].rgbtGreen = round_avg6(image[i][j].rgbtGreen, image[i + 1][j].rgbtGreen, image[i - 1][j].rgbtGreen,
-                                                   image[i][j - 1].rgbtGreen, image[i - 1][j - 1].rgbtGreen, image[i + 1][j - 1].rgbtGreen);
-                image[i][j].rgbtRed = round_avg6(image[i][j].rgbtRed, image[i + 1][j].rgbtRed, image[i - 1][j].rgbtRed,
-                                                 image[i][j - 1].rgbtRed, image[i - 1][j - 1].rgbtRed, image[i + 1][j - 1].rgbtRed);
+                image[i][j].rgbtBlue = round_avg6(image_c[i][j].rgbtBlue, image_c[i + 1][j].rgbtBlue, image_c[i - 1][j].rgbtBlue,
+                                                  image_c[i][j - 1].rgbtBlue, image_c[i - 1][j - 1].rgbtBlue, image_c[i + 1][j - 1].rgbtBlue);
+                image[i][j].rgbtGreen = round_avg6(image_c[i][j].rgbtGreen, image_c[i + 1][j].rgbtGreen, image_c[i - 1][j].rgbtGreen,
+                                                   image_c[i][j - 1].rgbtGreen, image_c[i - 1][j - 1].rgbtGreen, image_c[i + 1][j - 1].rgbtGreen);
+                image[i][j].rgbtRed = round_avg6(image_c[i][j].rgbtRed, image_c[i + 1][j].rgbtRed, image_c[i - 1][j].rgbtRed,
+                                                 image_c[i][j - 1].rgbtRed, image_c[i - 1][j - 1].rgbtRed, image_c[i + 1][j - 1].rgbtRed);
             }
             // This is the final middle pixel case
             else
             {
-                image[i][j].rgbtBlue = round_avg9(image[i][j].rgbtBlue, image[i][j - 1].rgbtBlue, image[i - 1][j].rgbtBlue,
-                                                  image[i - 1][j - 1].rgbtBlue, image[i][j + 1].rgbtBlue, image[i + 1][j].rgbtBlue, image[i + 1][j + 1].rgbtBlue,
-                                                  image[i + 1][j - 1].rgbtBlue, image[i - 1][j + 1].rgbtBlue);
-                image[i][j].rgbtGreen = round_avg9(image[i][j].rgbtGreen, image[i][j - 1].rgbtGreen, image[i - 1][j].rgbtGreen,
-                                                   image[i - 1][j - 1].rgbtGreen, image[i][j + 1].rgbtGreen, image[i + 1][j].rgbtGreen, image[i + 1][j + 1].rgbtGreen,
-                                                   image[i + 1][j - 1].rgbtGreen, image[i - 1][j + 1].rgbtGreen);
-                image[i][j].rgbtRed = round_avg9(image[i][j].rgbtRed, image[i][j - 1].rgbtRed, image[i - 1][j].rgbtRed,
-                                                 image[i - 1][j - 1].rgbtRed, image[i][j + 1].rgbtRed, image[i + 1][j].rgbtRed, image[i + 1][j + 1].rgbtRed,
-                                                 image[i + 1][j - 1].rgbtRed, image[i - 1][j + 1].rgbtRed);
+                image[i][j].rgbtBlue = round_avg9(image_c[i][j].rgbtBlue, image_c[i][j - 1].rgbtBlue, image_c[i - 1][j].rgbtBlue,
+                                                  image_c[i - 1][j - 1].rgbtBlue, image_c[i][j + 1].rgbtBlue, image_c[i + 1][j].rgbtBlue, image_c[i + 1][j + 1].rgbtBlue,
+                                                  image_c[i + 1][j - 1].rgbtBlue, image_c[i - 1][j + 1].rgbtBlue);
+                image[i][j].rgbtGreen = round_avg9(image_c[i][j].rgbtGreen, image_c[i][j - 1].rgbtGreen, image_c[i - 1][j].rgbtGreen,
+                                                   image_c[i - 1][j - 1].rgbtGreen, image_c[i][j + 1].rgbtGreen, image_c[i + 1][j].rgbtGreen, image_c[i + 1][j + 1].rgbtGreen,
+                                                   image_c[i + 1][j - 1].rgbtGreen, image_c[i - 1][j + 1].rgbtGreen);
+                image[i][j].rgbtRed = round_avg9(image_c[i][j].rgbtRed, image_c[i][j - 1].rgbtRed, image_c[i - 1][j].rgbtRed,
+                                                 image_c[i - 1][j - 1].rgbtRed, image_c[i][j + 1].rgbtRed, image_c[i + 1][j].rgbtRed, image_c[i + 1][j + 1].rgbtRed,
+                                                 image_c[i + 1][j - 1].rgbtRed, image_c[i - 1][j + 1].rgbtRed);
             }
         }
     }
