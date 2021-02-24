@@ -30,8 +30,8 @@ int main(int argc, char *argv[])
     // i is the image counter
     int i = 0;
 
-    // This store the filename of image
-    char *filename = NULL;
+    // This stores the filename of image
+    char filename[8];
     FILE *img = NULL;
 
     // This loop ensures that whole file provided is read
@@ -65,7 +65,7 @@ int main(int argc, char *argv[])
             fwrite(buffer, 512, 1, img);
         }
     }
-    // Closing the last file after completion of writing process
+    // Closing the last files after completion of writing process
     fclose(img);
     fclose(image);
 }
