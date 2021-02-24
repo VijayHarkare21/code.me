@@ -9,7 +9,7 @@ int main(int argc, char *argv[])
     {
         // Print an error if user hasn't provided exactly one file name
         printf("Usage: ./recover image\n");
-        return 2;
+        return 1;
     }
 
     // Open the provided file
