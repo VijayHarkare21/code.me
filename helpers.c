@@ -230,7 +230,7 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
 // Definition of the rounded average function
 int round_avg(int a, int b, int c)
 {
-    return (int) round((a + b + c) / 3);
+    return (int) round((a + b + c) / 3.0);
 }
 
 // Definition of the swap function
