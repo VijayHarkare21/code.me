@@ -252,17 +252,17 @@ void swap(BYTE *r, BYTE *g, BYTE *b, BYTE *rr, BYTE *gg, BYTE *bb)
 // Definition of round_avg4 function
 int round_avg4(int a, int b, int c, int d)
 {
-    return (int) round((a + b + c + d) / 4);
+    return (int) round((a + b + c + d) / 4.0);
 }
 
 // Definition of round_avg6 function
 int round_avg6(int a, int b, int c, int d, int e, int f)
 {
-    return (int) round((a + b + c + d + e + f) / 6);
+    return (int) round((a + b + c + d + e + f) / 6.0);
 }
 
 // Definition of round_avg9 function
 int round_avg9(int a, int b, int c, int d, int e, int f, int g, int h, int i)
 {
-    return (int) round((a + b + c + d + e + f + g + h + i) / 9);
+    return (int) round((a + b + c + d + e + f + g + h + i) / 9.0);
 }
