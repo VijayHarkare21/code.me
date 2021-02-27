@@ -198,7 +198,7 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
         image_c[i][width + 2].rgbtRed = 0;
     }
     //Now writing black colour to the row edges
-    for (int i = 1; i < width; i++)
+    for (int i = 1; i < width + 1; i++)
     {
         image_c[0][i].rgbtBlue = 0;
         image_c[0][i].rgbtGreen = 0;
@@ -212,9 +212,9 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
     {
         for (int j = 1; j < width + 1; j++)
         {
-            image_c[i][j].rgbtBlue = image[i][j].rgbtBlue;
-            image_c[i][j].rgbtGreen = image[i][j].rgbtGreen;
-            image_c[i][j].rgbtRed = image[i][j].rgbtRed;
+            image_c[i][j].rgbtBlue = image[i - 1][j - 1].rgbtBlue;
+            image_c[i][j].rgbtGreen = image[i - 1][j - 1].rgbtGreen;
+            image_c[i][j].rgbtRed = image[i - 1][j - 1].rgbtRed;
         }
     }
     // Defining Gx
