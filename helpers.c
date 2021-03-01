@@ -326,13 +326,14 @@ int arr_mult_add_red(int gx[3][3], int gy[3][3], RGBTRIPLE grid[3][3])
     }
     // The square root is calculated for the magnitudes
     double root = sqrt((x * x) + (y * y));
-    if ((int) round(root) > 255)
+    int a = (int) round(root);
+    if (a > 255)
     {
         return 255;
     }
     else
     {
-        return (int) round(root);
+        return a;
     }
 
 }
@@ -354,13 +355,14 @@ int arr_mult_add_green(int gx[3][3], int gy[3][3], RGBTRIPLE grid[3][3])
     }
     // The square root is calculated for the magnitudes
     double root = sqrt((x * x) + (y * y));
-    if ((int) round(root) > 255)
+    int a = (int) round(root);
+    if (a > 255)
     {
         return 255;
     }
     else
     {
-        return (int) round(root);
+        return a;
     }
 }
 
@@ -381,12 +383,13 @@ int arr_mult_add_blue(int gx[3][3], int gy[3][3], RGBTRIPLE grid[3][3])
     }
     // The square root is calculated for the magnitudes
     double root = sqrt((x * x) + (y * y));
-    if ((int) round(root) > 255)
+    int a = (int) round(root);
+    if (a > 255)
     {
         return 255;
     }
     else
     {
-        return (int) round(root);
+        return a;
     }
 }
