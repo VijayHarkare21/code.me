@@ -260,55 +260,10 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
             grid[2][1].rgbtRed = image_c[i + 1][j].rgbtRed;
             grid[2][2].rgbtRed = image_c[i + 1][j + 1].rgbtRed;
 
-            // Check whether the blue colour exceeds 255. If yes do the necessary adjustments
-            if (arr_mult_add_blue(Gx, Gy, grid) > 255)
-            {
-                image[i - 1][j - 1].rgbtBlue = 255;
-                // Here other colour conditions are also checked to avoid any glitches
-                if (arr_mult_add_green(Gx, Gy, grid) <= 255)
-                {
-                    image[i - 1][j - 1].rgbtGreen = arr_mult_add_green(Gx, Gy, grid);
-                }
-                if (arr_mult_add_red(Gx, Gy, grid) <= 255)
-                {
-                    image[i - 1][j - 1].rgbtRed = arr_mult_add_red(Gx, Gy, grid);
-                }
-            }
-            // Then check whether the green colour exceeds 255. If yes do the necessary adjustments
-            if (arr_mult_add_green(Gx, Gy, grid) > 255)
-            {
-                // Here other colour conditions are also checked to avoid any glitches
-                if (arr_mult_add_blue(Gx, Gy, grid) <= 255)
-                {
-                    image[i - 1][j - 1].rgbtBlue = arr_mult_add_blue(Gx, Gy, grid);
-                }
-                image[i - 1][j - 1].rgbtGreen = 255;
-                if (arr_mult_add_red(Gx, Gy, grid) <= 255)
-                {
-                    image[i - 1][j - 1].rgbtRed = arr_mult_add_red(Gx, Gy, grid);
-                }
-            }
-            // Then check whether the red colour exceeds 255. If yes do the necessary adjustments
-            if (arr_mult_add_red(Gx, Gy, grid) > 255)
-            {
-                // Here other colour conditions are also checked to avoid any glitches
-                if (arr_mult_add_blue(Gx, Gy, grid) <= 255)
-                {
-                    image[i - 1][j - 1].rgbtBlue = arr_mult_add_blue(Gx, Gy, grid);
-                }
-                if (arr_mult_add_green(Gx, Gy, grid) <= 255)
-                {
-                    image[i - 1][j - 1].rgbtGreen = arr_mult_add_green(Gx, Gy, grid);
-                }
-                image[i - 1][j - 1].rgbtRed = 255;
-            }
-            // After checking each of the above cases, if none are true, then do the following basic substitution
-            else
-            {
-                image[i - 1][j - 1].rgbtBlue = arr_mult_add_blue(Gx, Gy, grid);
-                image[i - 1][j - 1].rgbtGreen = arr_mult_add_green(Gx, Gy, grid);
-                image[i - 1][j - 1].rgbtRed = arr_mult_add_red(Gx, Gy, grid);
-            }
+            // Now putting the respective colour values after calculating them by using various functions
+            image[i - 1][j - 1].rgbtBlue = arr_mult_add_blue(Gx, Gy, grid);
+            image[i - 1][j - 1].rgbtGreen = arr_mult_add_green(Gx, Gy, grid);
+            image[i - 1][j - 1].rgbtRed = arr_mult_add_red(Gx, Gy, grid);
         }
     }
     return;
@@ -358,58 +313,80 @@ int round_avg9(int a, int b, int c, int d, int e, int f, int g, int h, int i)
 int arr_mult_add_red(int gx[3][3], int gy[3][3], RGBTRIPLE grid[3][3])
 {
     // Defining two variables for storing Gx and Gy values
-    double Gx = 0;
-    double Gy = 0;
+    double x = 0;
+    double y = 0;
     // In this loop the multiplication and addition takes place
     for (int i = 0; i < 3; i++)
     {
         for (int j = 0; j < 3; j++)
         {
-            Gx = Gx + (grid[i][j].rgbtRed * gx[i][j]);
-            Gy = Gy + (grid[i][j].rgbtRed * gy[i][j]);
+            x += (grid[i][j].rgbtRed * gx[i][j]);
+            y += (grid[i][j].rgbtRed * gy[i][j]);
         }
     }
     // The square root is calculated for the magnitudes
-    double root = sqrt((Gx * Gx) + (Gy * Gy));
-    return (int) round(root);
+    double root = sqrt((x * x) + (y * y));
+    if ((int) round(root) > 255)
+    {
+        return 255;
+    }
+    else
+    {
+        return (int) round(root);
+    }
+
 }
 
 // Definition of the arr_mult_add_green function
 int arr_mult_add_green(int gx[3][3], int gy[3][3], RGBTRIPLE grid[3][3])
 {
     // Defining two variables for storing Gx and Gy values
-    double Gx = 0;
-    double Gy = 0;
+    double x = 0;
+    double y = 0;
     // In this loop the multiplication and addition takes place
     for (int i = 0; i < 3; i++)
     {
         for (int j = 0; j < 3; j++)
         {
-            Gx = Gx + (grid[i][j].rgbtGreen * gx[i][j]);
-            Gy = Gy + (grid[i][j].rgbtGreen * gy[i][j]);
+            x += (grid[i][j].rgbtGreen * gx[i][j]);
+            y += (grid[i][j].rgbtGreen * gy[i][j]);
         }
     }
     // The square root is calculated for the magnitudes
-    double root = sqrt((Gx * Gx) + (Gy * Gy));
-    return (int) round(root);
+    double root = sqrt((x * x) + (y * y));
+    if ((int) round(root) > 255)
+    {
+        return 255;
+    }
+    else
+    {
+        return (int) round(root);
+    }
 }
 
 // Definition of the arr_mult_add_blue function
 int arr_mult_add_blue(int gx[3][3], int gy[3][3], RGBTRIPLE grid[3][3])
 {
     // Defining two variables for storing Gx and Gy values
-    double Gx = 0;
-    double Gy = 0;
+    double x = 0;
+    double y = 0;
     // In this loop the multiplication and addition takes place
     for (int i = 0; i < 3; i++)
     {
         for (int j = 0; j < 3; j++)
         {
-            Gx = Gx + (grid[i][j].rgbtBlue * gx[i][j]);
-            Gy = Gy + (grid[i][j].rgbtBlue * gy[i][j]);
+            x += (grid[i][j].rgbtBlue * gx[i][j]);
+            y += (grid[i][j].rgbtBlue * gy[i][j]);
         }
     }
     // The square root is calculated for the magnitudes
-    double root = sqrt((Gx * Gx) + (Gy * Gy));
-    return (int) round(root);
+    double root = sqrt((x * x) + (y * y));
+    if ((int) round(root) > 255)
+    {
+        return 255;
+    }
+    else
+    {
+        return (int) round(root);
+    }
 }
