@@ -320,8 +320,8 @@ int arr_mult_add_red(int gx[3][3], int gy[3][3], RGBTRIPLE grid[3][3])
     {
         for (int j = 0; j < 3; j++)
         {
-            x += (double) (grid[i][j].rgbtRed * gx[i][j]);
-            y += (double) (grid[i][j].rgbtRed * gy[i][j]);
+            x += (grid[i][j].rgbtRed * gx[i][j]);
+            y += (grid[i][j].rgbtRed * gy[i][j]);
         }
     }
     // The square root is calculated for the magnitudes
@@ -348,8 +348,8 @@ int arr_mult_add_green(int gx[3][3], int gy[3][3], RGBTRIPLE grid[3][3])
     {
         for (int j = 0; j < 3; j++)
         {
-            x += (double) (grid[i][j].rgbtGreen * gx[i][j]);
-            y += (double) (grid[i][j].rgbtGreen * gy[i][j]);
+            x += (grid[i][j].rgbtGreen * gx[i][j]);
+            y += (grid[i][j].rgbtGreen * gy[i][j]);
         }
     }
     // The square root is calculated for the magnitudes
@@ -375,8 +375,8 @@ int arr_mult_add_blue(int gx[3][3], int gy[3][3], RGBTRIPLE grid[3][3])
     {
         for (int j = 0; j < 3; j++)
         {
-            x += (double) (grid[i][j].rgbtBlue * gx[i][j]);
-            y += (double) (grid[i][j].rgbtBlue * gy[i][j]);
+            x += (grid[i][j].rgbtBlue * gx[i][j]);
+            y += (grid[i][j].rgbtBlue * gy[i][j]);
         }
     }
     // The square root is calculated for the magnitudes
