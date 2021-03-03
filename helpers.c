@@ -1,5 +1,6 @@
 #include "helpers.h"
 #include <math.h>
+#include <stdio.h>
 
 // Function to round the average of 3 ints to nearest integer
 int round_avg(int a, int b, int c);
@@ -326,6 +327,7 @@ int arr_mult_add_red(int gx[3][3], int gy[3][3], RGBTRIPLE grid[3][3])
     }
     // The square root is calculated for the magnitudes
     double root = sqrt((x * x) + (y * y));
+    printf("%lf\n", root);
     int a = (int) round(root);
     if (a > 255)
     {
@@ -355,6 +357,7 @@ int arr_mult_add_green(int gx[3][3], int gy[3][3], RGBTRIPLE grid[3][3])
     }
     // The square root is calculated for the magnitudes
     double root = sqrt((x * x) + (y * y));
+    printf("%lf\n", root);
     int a = (int) round(root);
     if (a > 255)
     {
@@ -383,6 +386,7 @@ int arr_mult_add_blue(int gx[3][3], int gy[3][3], RGBTRIPLE grid[3][3])
     }
     // The square root is calculated for the magnitudes
     double root = sqrt((x * x) + (y * y));
+    printf("%lf\n", root);
     int a = (int) round(root);
     if (a > 255)
     {
