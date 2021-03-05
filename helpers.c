@@ -16,9 +16,8 @@ int round_avg6(int a, int b, int c, int d, int e, int f);
 // Function to round the average of 9 ints to nearest integer
 int round_avg9(int a, int b, int c, int d, int e, int f, int g, int h, int i);
 
-int w_sum(int a, int b, int c, int d, int e, int f, int g, int h, int i, int arr[3][3]);
-
-int root(int a, int b);
+// Function to calculate the square root of the sum of the given two integers, check whether it is greater than, less than or equal to 255, and return the appropriate result
+int s_root(int x, int y);
 
 // Convert image to grayscale
 void grayscale(int height, int width, RGBTRIPLE image[height][width])
@@ -182,25 +181,10 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
 // Detect edges
 void edges(int height, int width, RGBTRIPLE image[height][width])
 {
+    // Defining a temporary array for copying the original image
     RGBTRIPLE image_c[height + 2][width + 2];
-    for (int i = 0; i < height + 2; i ++)
-    {
-        image_c[i][0].rgbtBlue = 0;
-        image_c[i][0].rgbtGreen = 0;
-        image_c[i][0].rgbtRed = 0;
-        image_c[i][width + 2].rgbtBlue = 0;
-        image_c[i][width + 2].rgbtGreen = 0;
-        image_c[i][width + 2].rgbtRed = 0;
-    }
-    for (int i = 1; i < width + 1; i++)
-    {
-        image_c[0][i].rgbtBlue = 0;
-        image_c[0][i].rgbtGreen = 0;
-        image_c[0][i].rgbtRed = 0;
-        image_c[height + 2][i].rgbtBlue = 0;
-        image_c[height + 2][i].rgbtGreen = 0;
-        image_c[height + 2][i].rgbtRed = 0;
-    }
+
+    // Copying the original image
     for (int i = 0; i < height; i++)
     {
         for (int j = 0; j < width; j++)
@@ -210,43 +194,56 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
             image_c[i + 1][j + 1].rgbtRed = image[i][j].rgbtRed;
         }
     }
+    // Defining the x and y kernels
     int Gx[3][3] = {{-1, 0, 1}, {-2, 0, 2}, {-1, 0, 1}};
     int Gy[3][3] = {{-1, -2, -1}, {0, 0, 0}, {1, 2, 1}};
 
+    // From here, actual process starts
     for (int i = 1; i < height + 1; i++)
     {
         for (int j = 1; j < width + 1; j++)
         {
+            // Defining variables to track the weighted sum of various
             int gx_blue = 0;
             int gy_blue = 0;
             int gx_green = 0;
             int gy_green = 0;
             int gx_red = 0;
             int gy_red = 0;
-            gx_blue = w_sum(image_c[i - 1][j - 1].rgbtBlue, image_c[i - 1][j].rgbtBlue, image_c[i - 1][j + 1].rgbtBlue,
-                            image_c[i][j - 1].rgbtBlue, image_c[i][j].rgbtBlue, image_c[i][j + 1].rgbtBlue,
-                            image_c[i + 1][j - 1].rgbtBlue, image_c[i + 1][j].rgbtBlue, image_c[i + 1][j + 1].rgbtBlue, Gx);
-            gy_blue = w_sum(image_c[i - 1][j - 1].rgbtBlue, image_c[i - 1][j].rgbtBlue, image_c[i - 1][j + 1].rgbtBlue,
-                            image_c[i][j - 1].rgbtBlue, image_c[i][j].rgbtBlue, image_c[i][j + 1].rgbtBlue,
-                            image_c[i + 1][j - 1].rgbtBlue, image_c[i + 1][j].rgbtBlue, image_c[i + 1][j + 1].rgbtBlue, Gy);
-            gx_green = w_sum(image_c[i - 1][j - 1].rgbtGreen, image_c[i - 1][j].rgbtGreen, image_c[i - 1][j + 1].rgbtGreen,
-                             image_c[i][j - 1].rgbtGreen, image_c[i][j].rgbtGreen, image_c[i][j + 1].rgbtGreen,
-                             image_c[i + 1][j - 1].rgbtGreen, image_c[i + 1][j].rgbtGreen, image_c[i + 1][j + 1].rgbtGreen, Gx);
-            gy_green = w_sum(image_c[i - 1][j - 1].rgbtGreen, image_c[i - 1][j].rgbtGreen, image_c[i - 1][j + 1].rgbtGreen,
-                             image_c[i][j - 1].rgbtGreen, image_c[i][j].rgbtGreen, image_c[i][j + 1].rgbtGreen,
-                             image_c[i + 1][j - 1].rgbtGreen, image_c[i + 1][j].rgbtGreen, image_c[i + 1][j + 1].rgbtGreen, Gy);
-            gx_red = w_sum(image_c[i - 1][j - 1].rgbtRed, image_c[i - 1][j].rgbtRed, image_c[i - 1][j + 1].rgbtRed,
-                           image_c[i][j - 1].rgbtRed, image_c[i][j].rgbtRed, image_c[i][j + 1].rgbtRed,
-                           image_c[i + 1][j - 1].rgbtRed, image_c[i + 1][j].rgbtRed, image_c[i + 1][j + 1].rgbtRed, Gx);
-            gy_red = w_sum(image_c[i - 1][j - 1].rgbtRed, image_c[i - 1][j].rgbtRed, image_c[i - 1][j + 1].rgbtRed,
-                           image_c[i][j - 1].rgbtRed, image_c[i][j].rgbtRed, image_c[i][j + 1].rgbtRed,
-                           image_c[i + 1][j - 1].rgbtRed, image_c[i + 1][j].rgbtRed, image_c[i + 1][j + 1].rgbtRed, Gy);
-            image[i - 1][j - 1].rgbtBlue = root(gx_blue, gy_blue);
-            image[i - 1][j - 1].rgbtGreen = root(gx_green, gy_green);
-            image[i - 1][j - 1].rgbtRed = root(gx_red, gy_red);
+
+            // Now looping throught the 3*3 grid, while checking for edge and corner pixels
+            for (int m = -1; m < 2; m++)
+            {
+                for (int n = -1; n < 2; n++)
+                {
+                    // This step ensures that weighted sum of edge and corner pixels is properly calculated
+                    if (i + m == 0 || i + m == height + 1 || j + n == 0 || j + n == width + 1)
+                    {
+                        continue;
+                    }
+
+                    // Now we multiply each pixel of the 3*3 grid with the respective gx and gy values
+                    gx_blue += image_c[i + m][j + n].rgbtBlue * Gx[m + 1][n + 1];
+                    gy_blue += image_c[i + m][j + n].rgbtBlue * Gy[m + 1][n + 1];
+                    gx_green += image_c[i + m][j + n].rgbtGreen * Gx[m + 1][n + 1];
+                    gy_green += image_c[i + m][j + n].rgbtGreen * Gy[m + 1][n + 1];
+                    gx_red += image_c[i + m][j + n].rgbtRed * Gx[m + 1][n + 1];
+                    gy_red += image_c[i + m][j + n].rgbtRed * Gy[m + 1][n + 1];
+                }
+            }
+
+            // Here, we define variables to store the square roots temporarily
+            int s_blue = s_root(gx_blue, gy_blue);
+            int s_green = s_root(gx_green, gy_green);
+            int s_red = s_root(gx_red, gy_red);
+
+            // Now we finally put the modified image pixels together for the effect
+            image[i - 1][j - 1].rgbtBlue = s_blue;
+            image[i - 1][j - 1].rgbtGreen = s_green;
+            image[i - 1][j - 1].rgbtRed = s_red;
         }
     }
-        return;
+    return;
 }
 
 // Definition of the rounded average function
@@ -289,16 +286,11 @@ int round_avg9(int a, int b, int c, int d, int e, int f, int g, int h, int i)
     return (int) round((a + b + c + d + e + f + g + h + i) / 9.0);
 }
 
-int w_sum(int a, int b, int c, int d, int e, int f, int g, int h, int i, int arr[3][3])
+// Definition of the s_root function
+int s_root(int x, int y)
 {
-    int sum = a * arr[0][0] + b * arr[0][1] + c * arr[0][2] + d * arr[1][0] + e * arr[1][1] + f * arr[1][2] +
-              g * arr[2][0] + h * arr[2][1] + i * arr[2][2];
-    return sum;
-}
-
-int root(int a, int b)
-{
-    int root = (int) round(sqrt((a * a) + (b * b)));
+    int root = (int) round(sqrt((x * x) + (y * y)));
+    // Here we check for the limiting cases
     if (root >= 255)
     {
         return 255;
