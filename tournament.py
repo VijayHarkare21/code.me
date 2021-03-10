@@ -3,7 +3,6 @@
 import csv
 import sys
 import random
-import math
 
 # Number of simluations to run
 N = 1000
