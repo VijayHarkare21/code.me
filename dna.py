@@ -60,7 +60,7 @@ def main():
             TATC = STR_Repeat(sequences, 'TATC', 4)
             TTTTTTCT = STR_Repeat(sequences, 'TTTTTTCT', 8)
             TCTAG = STR_Repeat(sequences, 'TCTAG', 5)
-            GATA = STR_Repeat(sequences,'GATA', 4)
+            GATA = STR_Repeat(sequences, 'GATA', 4)
             GAAA = STR_Repeat(sequences, 'GAAA', 4)
             TCTG = STR_Repeat(sequences, 'TCTG', 4)
 
@@ -80,6 +80,7 @@ def main():
     # Even after iterating throughout the database, if no match is found, we print out that no match was found
     print("No match")
     return 0
+
 
 # Defining the function for calculation of consecutive STRs
 def STR_Repeat(dna, STR, Len):
@@ -107,5 +108,6 @@ def STR_Repeat(dna, STR, Len):
             break
     # Return the max. no. of times the pattern repeats itself consecutively
     return count
+
 
 main()
