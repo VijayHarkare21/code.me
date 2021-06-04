@@ -1,0 +1,3 @@
+The THIEF is:Russell
+The thief ESCAPED TO:Boston
+The ACCOMPLICE is:Philip
