@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="styles.css" rel="stylesheet">
+        <title>Trivia!</title>
+
+        <script>
+
+            // Check answers to MCQ question
+            document.addEventListener('DOMContentLoaded', function() {
+                document.querySelector('#B').addEventListener('click', function() {
+                    document.querySelector('#B').style.backgroundColor = 'green';
+                    document.getElementById('check_mcq').innerHTML = "Correct!";
+                    document.querySelector('#A').style.backgroundColor = '#d9edff';
+                    document.querySelector('#C').style.backgroundColor = '#d9edff';
+                    document.querySelector('#D').style.backgroundColor = '#d9edff';
+                })
+                document.querySelector('#A').addEventListener('click', function() {
+                    document.querySelector('#A').style.backgroundColor = 'red';
+                    document.getElementById('check_mcq').innerHTML = "Incorrect.";
+                    document.querySelector('#B').style.backgroundColor = '#d9edff';
+                    document.querySelector('#C').style.backgroundColor = '#d9edff';
+                    document.querySelector('#D').style.backgroundColor = '#d9edff';
+                })
+                document.querySelector('#C').addEventListener('click', function() {
+                    document.querySelector('#C').style.backgroundColor = 'red';
+                    document.getElementById('check_mcq').innerHTML = "Incorrect.";
+                    document.querySelector('#A').style.backgroundColor = '#d9edff';
+                    document.querySelector('#B').style.backgroundColor = '#d9edff';
+                    document.querySelector('#D').style.backgroundColor = '#d9edff';
+                })
+                document.querySelector('#D').addEventListener('click', function() {
+                    document.querySelector('#D').style.backgroundColor = 'red';
+                    document.getElementById('check_mcq').innerHTML = "Incorrect.";
+                    document.querySelector('#A').style.backgroundColor = '#d9edff';
+                    document.querySelector('#B').style.backgroundColor = '#d9edff';
+                    document.querySelector('#C').style.backgroundColor = '#d9edff';
+                })
+            });
+
+            // Check answer to free response question
+            function check()
+            {
+                if (document.querySelector('input').value == "Russia")
+                {
+                    document.getElementById('check_free').innerHTML = "Correct!";
+                    document.querySelector('input').style.backgroundColor = 'green';
+                }
+                else
+                {
+                    document.getElementById('check_free').innerHTML = "Incorrect.";
+                    document.querySelector('input').style.backgroundColor = 'red';
+                }
+            }
+
+        </script>
+
+    </head>
+    <body>
+
+        <div class="jumbotron">
+            <h1>Trivia!</h1>
+        </div>
+
+        <div class="container">
+
+            <div class="section">
+                <h2>Part 1: Multiple Choice </h2>
+                <hr>
+
+                <!-- Add multiple choice question here -->
+                <h3>Which of the following is the capital of Romania?</h3>
+                <button id="A">Brussels</button>
+                <button id="B">Bucharest</button>
+                <button id="C">Budapest</button>
+                <button id="D">Buenos Aires</button>
+                <p id='check_mcq'> </p>
+
+            </div>
+
+            <div class="section">
+                <h2>Part 2: Free Response</h2>
+                <hr>
+
+                <!-- Add free response question here -->
+                <h3>Which is the largest country in the world by area?</h3>
+                <form onsubmit="check(); return false;">
+                    <input id="country" autocomplete="off" type="text">
+                    <input type="submit" value="Check Answer">
+                </form>
+                <p id="check_free"></p>
+            </div>
+
+        </div>
+    </body>
+</html>
