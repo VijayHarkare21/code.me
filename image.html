@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Search</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            body {
+                overflow: scroll;
+            }
+            ul {
+                position: fixed;
+                right: 0;
+                top: 0;
+                margin: 5px;
+            }
+            form {
+                margin: 0;
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+            #search {
+                margin: 0;
+                position:relative;
+                top: 0%;
+                left: 50%;
+                transform: translate(-50%, 0%);
+            }
+            #bar {
+                border-radius: 50px;
+                width: 500px;
+                height: 25px;
+                margin-top: 0px;
+                margin-bottom: 6px;
+            }
+            h1 {
+                margin: 0;
+                position: fixed;
+                top: 39%;
+                left: 50%;
+                transform: translate(-50%, -60%);
+                font-size: 100px;
+            }
+            .style1 {
+                color: #4285F4;
+            }
+            .style2 {
+                color: #DB4437;
+            }
+            .style3 {
+                color: #F4B400;
+            }
+            .style4 {
+                color: #0F9D58;
+            }
+            p {
+                margin: 0;
+                position: fixed;
+                top: 44%;
+                left: 57.5%;
+                transform: translate(-50%, -60%);
+                color: #4285F4;
+                height: 24px;
+                width: 60px;
+                font: roboto-regular, arial, sans-serif;
+                font-size: 17px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1><span class="style1">G</span><span class="style2">o</span><span class="style3">o</span><span class="style1">g</span><span class="style4">l</span><span class="style2">e</span></h1>
+        <p>images</p>
+        <form action="https://images.google.com/images">
+            <input id="bar" type="text" name="q" placeholder="Search Google Images or type a URL">
+            <br />
+            <input id="search" type="submit" value="Google Image Search">
+        </form>
+        <ul>
+            <li><a href="index.html">Google Search</a></li>
+        </ul>
+        <p>
+            &nbsp;</p>
+        <p>
+            &nbsp;</p>
+    </body>
+</html>
