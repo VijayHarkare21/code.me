@@ -46,4 +46,6 @@ def info(request):
         pokemons += "\n\n"
         j += 1
     final = f"{type_names}{pokemons}"
-    return HttpResponse(final, content_type = "text/plain")
+    if response.status_code == 200:
+        return HttpResponse(final, content_type = "text/plain")
+    return HttpResponse("An error ocurred while loading all types.")
