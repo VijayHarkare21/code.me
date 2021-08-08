@@ -4,6 +4,7 @@ import requests
 import json
 
 # Create your views here.
+# Task 2
 def type(request):
     url = "https://pokeapi.co/api/v2/type"
     response = requests.get(url)
@@ -17,7 +18,7 @@ def type(request):
         return HttpResponse(type_names, content_type = "text/plain")
     return HttpResponse("An error ocurred while loading all types.")
 
-# Bonus task
+# Bonus task(Task 2)
 def info(request):
     url = "https://pokeapi.co/api/v2/type"
     response = requests.get(url)
