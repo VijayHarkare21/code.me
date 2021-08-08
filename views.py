@@ -33,16 +33,20 @@ def info(request):
     # n for new and cmp for complete info.
     pokemons = ""
     for line_1 in text_1:    
+        j1 = 1
+        j2 = 1
         nresponse = requests.get(line_1['url'])
         moves_cmp = json.loads(nresponse.text)['moves']
         pokemons += f"Type {j}: {text_1[j - 1]['name']}\n    Moves are:"
         for move in moves_cmp:
-            pokemons += "\n" + "\t" + move['name']
+            pokemons += "\n" + "\t" + f"{j1}." + move['name']
+            j1 += 1
         pokemons += "\n\n"
         pokemon_cmp = json.loads(nresponse.text)['pokemon']
         pokemons += "    Pokemons of this type are:"
         for pokemon in pokemon_cmp:
-            pokemons += "\n" + "\t" + pokemon['pokemon']['name']
+            pokemons += "\n" + "\t" + f"{j2}." + pokemon['pokemon']['name']
+            j2 += 1
         pokemons += "\n\n"
         j += 1
     final = f"{type_names}{pokemons}"
